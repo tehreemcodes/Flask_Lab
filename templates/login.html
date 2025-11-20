@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Login Form</h2>
+        <form method="POST" action="/login">
+            {{ form.hidden_tag() }} 
+
+            <label>{{ form.username.label }}:</label>
+            {{ form.username(class_='input') }}<br>
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+
+            <label>{{ form.password.label }}:</label>
+            {{ form.password(class_='input') }}<br>
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+
+            {{ form.submit() }}
+        </form>
+        <p>Want to share your contact details? 
+            <a href="{{ url_for('contact') }}">Go to Contact Form</a>
+        </p>
+    </div>
+</body>
+</html>

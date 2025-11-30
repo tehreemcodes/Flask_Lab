@@ -2,7 +2,15 @@ pipeline {
     agent any
 
     tools {
-        maven 'MAVEN-3'   // my Maven installation name 
+        maven 'MAVEN-3'   // My maven name
+    }
+
+    parameters {
+        booleanParam(
+            name: 'executeTests',
+            defaultValue: true,
+            description: 'Run the Test stage?'
+        )
     }
 
     environment {
@@ -17,7 +25,7 @@ pipeline {
                 echo "Building version: ${VERSION}"
                 echo "Environment: ${ENVIRONMENT_NAME}"
 
-                // Example command that uses Maven
+                // Show Maven version (Windows uses bat instead of sh)
                 bat "mvn --version"
             }
         }
@@ -25,7 +33,7 @@ pipeline {
         stage('Test') {
             when {
                 expression {
-                    return true
+                    return params.executeTests == true
                 }
             }
             steps {

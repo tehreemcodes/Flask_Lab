@@ -1,18 +1,23 @@
 pipeline {
     agent any
 
+    environment {
+        VERSION = "1.0.0"
+        ENVIRONMENT_NAME = "Development"
+    }
+
     stages {
 
         stage('Build') {
             steps {
-                echo 'Building...'
+                echo "Building version: ${VERSION}"
+                echo "Environment: ${ENVIRONMENT_NAME}"
             }
         }
 
         stage('Test') {
             when {
                 expression {
-                    // Condition: run tests only if this returns true
                     return true
                 }
             }
@@ -23,7 +28,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo "Deploying version ${VERSION} to ${ENVIRONMENT_NAME}"
             }
         }
     }

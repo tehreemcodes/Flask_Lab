@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'MAVEN-3'   // my Maven installation name 
+    }
+
     environment {
         VERSION = "1.0.0"
         ENVIRONMENT_NAME = "Development"
@@ -12,6 +16,9 @@ pipeline {
             steps {
                 echo "Building version: ${VERSION}"
                 echo "Environment: ${ENVIRONMENT_NAME}"
+
+                // Example command that uses Maven
+                bat "mvn --version"
             }
         }
 
@@ -38,7 +45,7 @@ pipeline {
             echo 'Post build condition running'
         }
         failure {
-            echo 'Post Action if build Failed'
+            echo 'Post Action if build failed'
         }
     }
 }

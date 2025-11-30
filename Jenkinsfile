@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build') {
             steps {
                 echo 'Building...'
@@ -9,8 +10,14 @@ pipeline {
         }
 
         stage('Test') {
+            when {
+                expression {
+                    // Condition: run tests only if this returns true
+                    return true
+                }
+            }
             steps {
-                echo 'Testing'
+                echo 'Testing...'
             }
         }
 
